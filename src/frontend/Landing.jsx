@@ -16,7 +16,7 @@ function Landing() {
         </div>
     </section>
     <section className='my-15 text-center'>
-      <button className='font-extrabold text-2xl bg-green-500 text-white p-1 w-40 text-center cursor-pointer'>Let's go!</button>
+      <a href="/login"><button className='font-extrabold text-2xl bg-green-500 text-white p-1 w-40 text-center cursor-pointer'>Let's go!</button></a>
     </section>
     </main>
     <footer className='bg-yellow-200 mt-10 mb-0 h-full p-4 place-items-center'>
