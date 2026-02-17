@@ -1,9 +1,14 @@
 import Nav from './Nav'
+import { useState } from 'react';
 
 function Login(){
 
-    function handelSubmit(){
-        console.log("jai ho")
+    function handelSubmit(e){
+        
+    }
+
+    function handelChange(){
+        if(e.target.name="name"){}
     }
 
     return(
@@ -15,11 +20,11 @@ function Login(){
                     <form action="/" className='w-[70%] justify-self-center rounded-lg p-4'>
                         <div className='mb-4 flex justify-center'>
                         <label htmlFor="email" className='mr-4'>Email:</label>
-                        <input type="email" placeholder='example@gmail.com' name='email' className='border p-0.5 pl-1 rounded-lg ml-2'/>
+                        <input type="email" required onChange={(e)=>(handelChange(e))} placeholder='example@gmail.com' name='email' className='border p-0.5 pl-1 rounded-lg ml-2'/>
                         </div>
                         <div className='mb-4 flex justify-center'>
                         <label htmlFor="password" className='mr-4'>Password:</label>
-                        <input type="password" placeholder=' XXXX' name='password' className='border p-0.5 pl-1 rounded-lg ml-2' />
+                        <input type="password" required placeholder=' XXXX' name='password' className='border p-0.5 pl-1 rounded-lg ml-2' />
                         </div>
                         <div className="mb-4 flex justify-center"> 
                             <button className='bg-green-500 p-1.5 rounded-lg hover:bg-green-600 w-1/2 mt-5'>Submit</button>
