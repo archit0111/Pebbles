@@ -7,8 +7,10 @@ http.createServer((req,res)=>{
     res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers','Content-Type');
     console.log(`URL: ${req.url} Method: ${req.method}`);
+
+    //for data fetching
     
-    if(req.url ==='/signup'&&req.method==='GET'){
+    if(req.url ==='/signup'||req.url==="/login"&&req.method==='GET'){
         res.setHeader('Content-Type', 'application/json');
         let data = fs.readFileSync('../Database/Data.json','utf-8');
         res.end(data);

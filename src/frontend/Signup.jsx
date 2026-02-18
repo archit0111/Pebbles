@@ -33,7 +33,7 @@ function Signup(){
             fetch('http://localhost:3000/signup',{
                 method : "POST",
                 headers:{'Content-type':'application/json'},
-                body : JSON.stringify({name:name, emial:email, password:password})
+                body : JSON.stringify({name:name, email:email, password:password})
             })
             .then(responce=>responce.json())
             .then(data=>console.log("Data Added Successfully: "+data))
