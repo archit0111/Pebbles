@@ -39,7 +39,7 @@ function Login(){
         validation();
         let userExist = verify();
         if(userExist){
-            navigate('/');
+            navigate('/dashboard');
         }else{
             alert("Invalid Cridentials!! Please try agian..");
         }

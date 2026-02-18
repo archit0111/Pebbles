@@ -13,5 +13,15 @@
     "name": "SS",
     "email": "example@gmail.com",
     "password": "000000"
+  },
+  {
+    "name": "Rahul",
+    "email": "rahul@gmail.com",
+    "password": "123456"
+  },
+  {
+    "name": "mohan",
+    "email": "mohan@gmail.com",
+    "password": "123456"
   }
 ]

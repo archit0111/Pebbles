@@ -1,5 +1,6 @@
 import Nav from './Nav'
 import { useState , useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Signup(){
 
@@ -9,8 +10,8 @@ function Signup(){
     const [emailValid,setEmailValid]=useState(true);
     const [nameValid,setNameValid]=useState(true);
     const [passwordValid,setPasswordValid]=useState(true);
-    const [valid,setValid]=useState(false);
     const [data, setdata] =useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         fetch('http://localhost:3000/signup',{method : "GET"})
@@ -28,7 +29,7 @@ function Signup(){
     // handeling Submit req
 
     function handelSubmit(){
-        validation();
+        let valid=validation();
         if(valid){
             fetch('http://localhost:3000/signup',{
                 method : "POST",
@@ -38,8 +39,9 @@ function Signup(){
             .then(responce=>responce.json())
             .then(data=>console.log("Data Added Successfully: "+data))
             .catch(err=>console.log("Error occered in sending data: "+err));
-            alert("Completed!");
-        }
+            alert("You registered! Please login...");
+            navigate('/login');
+        }else{alert("Something went wrong!");}
     }
 
     function validation(){
@@ -58,10 +60,10 @@ function Signup(){
         }else{
             setPasswordValid(false);
         }
-        if(nameValid&&emailValid&&passwordValid){
-            setValid(true);
+        if(nameRegex.test(name)&&emailRegex.test(email)&&passwordRegex.test(password)){
+            return true;
         }else{
-            setValid(false);
+            return false;
         }
     }
 

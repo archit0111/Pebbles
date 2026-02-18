@@ -10,7 +10,7 @@ http.createServer((req,res)=>{
 
     //for data fetching
     
-    if(req.url ==='/signup'||req.url==="/login"&&req.method==='GET'){
+    if((req.url ==='/signup'||req.url==="/login")&&req.method==='GET'){
         res.setHeader('Content-Type', 'application/json');
         let data = fs.readFileSync('../Database/Data.json','utf-8');
         res.end(data);
@@ -25,7 +25,7 @@ http.createServer((req,res)=>{
                 let data = JSON.parse(body);
                 let fileData = fs.readFileSync('../Database/Data.json','utf-8');
                 let currentData = fileData?JSON.parse(fileData):[];
-                currentData.push(data);                
+                currentData.push(data);
             fs.writeFileSync('../Database/Data.json',JSON.stringify(currentData,null,2));
             res.end(JSON.stringify({message:"Data Stored sccessfully!"}))
             }
