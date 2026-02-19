@@ -10,13 +10,13 @@ function Signup(){
     const [emailValid,setEmailValid]=useState(true);
     const [nameValid,setNameValid]=useState(true);
     const [passwordValid,setPasswordValid]=useState(true);
-    const [data, setdata] =useState([]);
+    const [data, setData] =useState([]);
     const navigate = useNavigate();
 
     useEffect(()=>{
         fetch('http://localhost:3000/signup',{method : "GET"})
-        .then(response=>console.log("Data fetched!!" + response))
-        .then(data=>setdata(data))
+        .then(response=>response.json())
+        .then(data=>setData(data))
         .catch(err=>(console.log("Error occered in fectching data"+err)));
     },[])
 
@@ -30,7 +30,18 @@ function Signup(){
 
     function handelSubmit(){
         let valid=validation();
-        if(valid){
+        let userExist=data.map((item)=>{
+            if(item.email === email){
+                return true;
+            }
+            else{
+                return false;
+            }
+        })
+        if(userExist.includes(true)){
+            alert("User Exist already!! Please Login..");
+            navigate('/login');
+        }else if(valid){
             fetch('http://localhost:3000/signup',{
                 method : "POST",
                 headers:{'Content-type':'application/json'},

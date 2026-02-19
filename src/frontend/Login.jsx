@@ -39,7 +39,7 @@ function Login(){
         validation();
         let userExist = verify();
         if(userExist){
-            navigate('/dashboard');
+            navigate('/dashboard',{state:{email:email}});
         }else{
             alert("Invalid Cridentials!! Please try agian..");
         }

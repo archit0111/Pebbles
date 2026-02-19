@@ -10,7 +10,7 @@ http.createServer((req,res)=>{
 
     //for data fetching
     
-    if((req.url ==='/signup'||req.url==="/login")&&req.method==='GET'){
+    if((req.url ==='/signup'||req.url==="/login"||req.url==="/dashboard")&&req.method==='GET'){
         res.setHeader('Content-Type', 'application/json');
         let data = fs.readFileSync('../Database/Data.json','utf-8');
         res.end(data);
