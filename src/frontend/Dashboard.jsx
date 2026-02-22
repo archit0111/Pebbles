@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom";
+import Modal from './Modal';
 import Nav from "./Nav";
 
 
@@ -9,6 +10,7 @@ function Dasboard(){
     const location = useLocation();
     const [name,setName]=useState("");
     const [pebbels, setPebels]=useState(["this is a pebbels!"]);
+    const [showModal,setShowModal]=useState(false);
 
 
     const {email} = location.state;
@@ -31,11 +33,25 @@ function Dasboard(){
         }
     }
 
+    function handelClose(){
+        setShowModal(prev=>!prev);
+        alert(showModal)
+    }
+
     return(
         <>
         <Nav/>
+        {showModal?<Modal handelClose={handelClose}>
+            <div className="bg-yellow-100 rounded-2xl shadow-2xl text-center">
+                <div className="h-15 place-content-center place-self-center font-extrabold text-yellow-900 md:text-3xl text-2xl">Add new pebbel</div>
+                <div className="mt-4">
+                    <textarea name="newPebbel" className="border rounded-sm bg-yellow-50 my-4" rows={2} cols={40} placeholder=" Enter Your New Pebbels..."></textarea>
+                </div>
+                    <button className=" p-2 bg-green-400 hover:bg-green-500 hover:shadow-lg px-15 rounded-4xl m-2 mb-5">ADD</button>
+            </div>
+        </Modal>:null}
         <main className="mt-10 place-items-center">
-            <div className="w-9/10 py-10"><p className="font-extrabold text-3xl md:text-6xl"> <span className="text-yellow-900">Welcome!</span> <span className="text-yellow-600">{name}</span></p></div> 
+            <div className="w-9/10 py-10"><p className="font-extrabold text-3xl md:text-6xl"> <span className="text-yellow-900">Welcome!</span> <span className="text-yellow-600 transition transform hover:transla-y-4">{name}</span></p></div> 
 
             <div className="w-3/4 mt-10 pb-8 rounded-4xl shadow-2xl">
             <div className="h-14 text-center bg-yellow-200 place-content-center rounded-t-3xl mb-10"><p className="text-3xl text-yellow-600 font-extrabold">Your Pebbels</p></div>
@@ -48,7 +64,7 @@ function Dasboard(){
             </div>}
             </div>
             <div className="mt-20">
-                <button className="bg-green-400 hover:bg-green-500 hover:shadow-xl text-white p-4 rounded-2xl">Add New Pebbel</button>
+                <button className="bg-green-400 cursor-pointer hover:bg-green-500 hover:shadow-xl text-white p-4 rounded-2xl" onClick={handelClose}>Add New Pebbel</button>
             </div>
         </main>
         </>
