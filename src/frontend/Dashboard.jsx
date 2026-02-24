@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom";
 import Modal from './Modal';
 import Nav from "./Nav";
+import {Trash2} from 'lucide-react'
 
 
 function Dasboard(){
@@ -9,8 +10,9 @@ function Dasboard(){
     const [data,setData]=useState([]);
     const location = useLocation();
     const [name,setName]=useState("");
-    const [pebbels, setPebels]=useState(["this is a pebbels!"]);
+    const [pebbels, setPebbels]=useState([]);
     const [showModal,setShowModal]=useState(false);
+    const [newPebbel,setNewPebbel]=useState([]);
 
 
     const {email} = location.state;
@@ -27,7 +29,6 @@ function Dasboard(){
 
     function initiateUser(data){
         let user = data.find(user=>user.email === email);
-        alert(user);
         if(user){
             setName(user.name);
         }
@@ -35,19 +36,35 @@ function Dasboard(){
 
     function handelClose(){
         setShowModal(prev=>!prev);
-        alert(showModal)
+        alert(showModal + pebbels);
     }
 
+    function handelAddPebbel(){
+            setUser(prev=>{
+                let existingPebbels = Array.isArray(prev.pebbels)?prev.pebbels:[];
+                setPebbels([...existingPebbels,newPebbel]);
+                return{
+                    ...prev,pebbels:[...existingPebbels,newPebbel]
+                }
+            });
+            handelClose();
+            setPebbels(user.pebbels);
+    }
+
+    function handelDelete(i){
+        let updatedPebbels=pebbels.filter((_,index)=>(i !=index));
+        setPebbels(updatedPebbels);
+    }
     return(
         <>
         <Nav/>
         {showModal?<Modal handelClose={handelClose}>
-            <div className="bg-yellow-100 rounded-2xl shadow-2xl text-center">
+            <div className="bg-yellow-50 p-5 border-2 border-yellow-200 rounded-2xl shadow-2xl text-center">
                 <div className="h-15 place-content-center place-self-center font-extrabold text-yellow-900 md:text-3xl text-2xl">Add new pebbel</div>
                 <div className="mt-4">
-                    <textarea name="newPebbel" className="border rounded-sm bg-yellow-50 my-4" rows={2} cols={40} placeholder=" Enter Your New Pebbels..."></textarea>
+                    <textarea name="newPebbel" className="border rounded-sm border-yellow-700 bg-white my-4" rows={2} cols={40} placeholder=" Enter Your New Pebbels..." onChange={(e)=>setNewPebbel(e.target.value)}></textarea>
                 </div>
-                    <button className=" p-2 bg-green-400 hover:bg-green-500 hover:shadow-lg px-15 rounded-4xl m-2 mb-5">ADD</button>
+                    <button className=" p-2 bg-green-400 hover:bg-green-500 hover:shadow-lg px-15 rounded-4xl m-2 mb-5" onClick={handelAddPebbel}>ADD</button>
             </div>
         </Modal>:null}
         <main className="mt-10 place-items-center">
@@ -55,13 +72,21 @@ function Dasboard(){
 
             <div className="w-3/4 mt-10 pb-8 rounded-4xl shadow-2xl">
             <div className="h-14 text-center bg-yellow-200 place-content-center rounded-t-3xl mb-10"><p className="text-3xl text-yellow-600 font-extrabold">Your Pebbels</p></div>
-            {pebbels.length === 0?<div className="text-center font-medium pb-10"> Nothing to show!</div>:<div className="h-fit flex rounded-xl justify-between bg-yellow-100 p-1 px-2 hover:shadow-xl">
-                <div className="flex">
-                    <div className="pr-2">png</div>
-                    <div>{email}</div>
-                </div>
-                <div className="flex"><input type="checkbox" value="" /></div>
-            </div>}
+            {pebbels.length === 0?<div className="text-center font-medium pb-10"> Nothing to show!</div>:
+                pebbels.map((item,index)=>(
+                    <div className="h-fit rounded-xl justify-between bg-yellow-100 p-1 px-2 hover:shadow-xl mb-4">
+                    <div key={index} className="flex justify-between">
+                    <div className="flex">
+                        <div className="pr-2">{index+1}.</div>
+                        <div>{item}</div>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="flex"><input type="checkbox"/></div>
+                        <Trash2 className="hover:text-red-600 pr-1" onClick={()=>(handelDelete(index))} size={20}></Trash2>
+                    </div>
+                    </div>
+                    </div>
+                ))}
             </div>
             <div className="mt-20">
                 <button className="bg-green-400 cursor-pointer hover:bg-green-500 hover:shadow-xl text-white p-4 rounded-2xl" onClick={handelClose}>Add New Pebbel</button>
