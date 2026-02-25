@@ -46,7 +46,7 @@ http.createServer((req,res)=>{
                 let currentData = fileData?JSON.parse(fileData):[];
                 for (let i of currentData){
                     if(i.email===data.email){
-                        i.pebbels = data.pebbels;
+                        i.pebbles = data.pebbles;
                         userFound=true;
                     }
                 }
@@ -56,36 +56,10 @@ http.createServer((req,res)=>{
                 }
                 }
                 catch(err){
-                    res.end(JSON.stringify({message:"Error occered in updating pebbels :"+err}));
+                    res.end(JSON.stringify({message:"Error occered in updating pebbles :"+err}));
                 }
         })
-    }else if(req.url==='/dashboard'&&req.method==='Delete'){
-        res.setHeader('content-Type','application/json');
-        let body = '';
-        req.on('data',async()=>{
-            try{
-                let userFound = false;
-                let data = JSON.parse(body);
-                let fileData = fs.readFileSync('../Database/Data.json','utf-8');
-                let currentData = fileData?JSON.parse(fileData):[];
-                for(let i of currentData){
-                    if(i.email===data.email){
-                        let pebbels = i.pebbels;
-                        let updatedPebbels = pebbels.find(pebbel=>pebbel!=data.pebbel);
-                        i.pebbels=updatedPebbels;
-                    }
-                }
-                if(userFound){
-                    fs.writeFileSync('../Database/Data.json',JSON.stringify(currentData,null,2));
-                    res.end(JSON.stringify({message:"Deleted pebbel"}));
-                }
-            }
-            catch(err){
-                res.end(JSON.stringify({message:"Error occered in deleting pebbels: "+err}));
-            }
-        })
-    }
-    else{
+    }else{
         res.end('<>Page Not Found</>');
     }
 
