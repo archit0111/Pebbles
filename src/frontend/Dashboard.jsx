@@ -31,12 +31,12 @@ function Dasboard(){
         let user = data.find(user=>user.email === email);
         if(user){
             setName(user.name);
+            setPebbels(Array.isArray(user.pebbels)?user.pebbels:[]);
         }
     }
 
     function handelClose(){
         setShowModal(prev=>!prev);
-        alert(showModal + pebbels);
     }
 
     function handelAddPebbel(){
@@ -48,7 +48,6 @@ function Dasboard(){
                 }
             });
             handelClose();
-            setPebbels(user.pebbels);
     }
 
     function handelDelete(i){
@@ -57,14 +56,16 @@ function Dasboard(){
     }
 
     useEffect(()=>{
-        fetch('http://localhost:3000/dashboard',{
+        if(data.length>0){
+            fetch('http://localhost:3000/dashboard',{
             method : 'POST',
             headers:{'Content-type':'application/json'},
             body:JSON.stringify({email:email,pebbels:pebbels})
-        })
-        .then(response=>response.json())
-        .then(data=>console.log("Data: "+data))
-        .catch(err=>console.log("Error occered in updating Pebbels: "+err))
+            })
+            .then(response=>response.json())
+            .then(data=>console.log("Data: "+data))
+            .catch(err=>console.log("Error occered in updating Pebbels: "+err))
+        }
     },[pebbels]);
 
     
