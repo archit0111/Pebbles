@@ -34,7 +34,58 @@ http.createServer((req,res)=>{
             }
         })
 
-    }else{
+    }else if(req.url==='/dashboard'&&req.method==='POST'){
+        res.setHeader('content-Type','application/json');
+        let body = "";
+        req.on('data',chunk=>{body+=chunk.toString()});
+        req.on('end',async()=>{
+            try{
+                let userFound = false;
+                let data = JSON.parse(body);
+                let fileData = fs.readFileSync('../Database/Data.json','utf-8');
+                let currentData = fileData?JSON.parse(fileData):[];
+                for (let i of currentData){
+                    if(i.email===data.email){
+                        i.pebbels = data.pebbels;
+                        userFound=true;
+                    }
+                }
+                if(userFound){
+                    fs.writeFileSync('../Database/Data.json',JSON.stringify(currentData,null,2));
+                    res.end(JSON.stringify({message:"Pebbels updated!!"}));
+                }
+                }
+                catch(err){
+                    res.end(JSON.stringify({message:"Error occered in updating pebbels :"+err}));
+                }
+        })
+    }else if(req.url==='/dashboard'&&req.method==='Delete'){
+        res.setHeader('content-Type','application/json');
+        let body = '';
+        req.on('data',async()=>{
+            try{
+                let userFound = false;
+                let data = JSON.parse(body);
+                let fileData = fs.readFileSync('../Database/Data.json','utf-8');
+                let currentData = fileData?JSON.parse(fileData):[];
+                for(let i of currentData){
+                    if(i.email===data.email){
+                        let pebbels = i.pebbels;
+                        let updatedPebbels = pebbels.find(pebbel=>pebbel!=data.pebbel);
+                        i.pebbels=updatedPebbels;
+                    }
+                }
+                if(userFound){
+                    fs.writeFileSync('../Database/Data.json',JSON.stringify(currentData,null,2));
+                    res.end(JSON.stringify({message:"Deleted pebbel"}));
+                }
+            }
+            catch(err){
+                res.end(JSON.stringify({message:"Error occered in deleting pebbels: "+err}));
+            }
+        })
+    }
+    else{
         res.end('<>Page Not Found</>');
     }
 

@@ -55,6 +55,19 @@ function Dasboard(){
         let updatedPebbels=pebbels.filter((_,index)=>(i !=index));
         setPebbels(updatedPebbels);
     }
+
+    useEffect(()=>{
+        fetch('http://localhost:3000/dashboard',{
+            method : 'POST',
+            headers:{'Content-type':'application/json'},
+            body:JSON.stringify({email:email,pebbels:pebbels})
+        })
+        .then(response=>response.json())
+        .then(data=>console.log("Data: "+data))
+        .catch(err=>console.log("Error occered in updating Pebbels: "+err))
+    },[pebbels]);
+
+    
     return(
         <>
         <Nav/>
@@ -74,8 +87,8 @@ function Dasboard(){
             <div className="h-14 text-center bg-yellow-200 place-content-center rounded-t-3xl mb-10"><p className="text-3xl text-yellow-600 font-extrabold">Your Pebbels</p></div>
             {pebbels.length === 0?<div className="text-center font-medium pb-10"> Nothing to show!</div>:
                 pebbels.map((item,index)=>(
-                    <div className="h-fit rounded-xl justify-between bg-yellow-100 p-1 px-2 hover:shadow-xl mb-4">
-                    <div key={index} className="flex justify-between">
+                    <div key={index} className="h-fit rounded-xl justify-between bg-yellow-100 p-1 px-2 hover:shadow-xl mb-4">
+                    <div className="flex justify-between">
                     <div className="flex">
                         <div className="pr-2">{index+1}.</div>
                         <div>{item}</div>
