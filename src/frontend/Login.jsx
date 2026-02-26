@@ -48,7 +48,7 @@ function Login(){
     function verify(){
         let user = data.find(user=>user.email===email&&Number(user.password)===Number(password));
         if(user != undefined){
-             alert(`Wellcome! ${user.name}`);
+             alert(`Welcome! ${user.name}`);
              return true;
         }else{return false;}
     }

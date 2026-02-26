@@ -1,13 +1,19 @@
 import Nav from './Nav'
+import DashboardSnap from '../assets/DasboardSnap.png'
+import {CircleArrowRight} from 'lucide-react'
 
 function Landing() {
 
   return (
     <>
     <Nav/>
-    <main className='p-5'>
-      <p className='text-5xl font-extralight mt-10 lg:text-9xl'>Hello Dear,</p>
-    <section className='place-items-center'>
+    <main className='p-5 bg-slate-50'>
+      <p className='text-5xl mt-10 lg:text-8xl'>Welcome on Pebbel,</p>
+      <section className='place-items-center h-fit sm:flex gap-1 mt-20'>
+        <div className="bg-slate-50 h-60 w-4/5 text-center place-content-center "><img className='md:h-60 shadow-2xl justify-self-center' src={DashboardSnap} alt="Dasboard_snap" /></div>
+        <div className=' h-60 w-1/3 place-content-center text-center'><button className='bg-green-500 hover:bg-green-600 p-2 text-white px-4 rounded-sm font-extrabold flex items-center gap-1 cursor-pointer'>Get Started<CircleArrowRight size={18} /></button></div>
+      </section>
+    <section className='place-items-center mt-5'>
       <div className='bg-yellow-50 h-60 w-80 lg:h-130 lg:w-150 flex items-center justify-center text-center border border-yellow-950 rounded-sm mt-20'>
         <p className='font-bold text-4xl lg:text-6xl'>"A weightless way to manage your heavy lifting."</p>
         </div>
@@ -16,7 +22,7 @@ function Landing() {
         </div>
     </section>
     <section className='my-15 text-center'>
-      <a href="/login"><button className='font-extrabold text-2xl bg-green-500 text-white p-1 w-40 text-center cursor-pointer'>Let's go!</button></a>
+      <a href="/login"><button className='font-extrabold text-2xl bg-green-500 text-white p-1 w-40 text-center cursor-pointer rounded-sm'>Let's go!</button></a>
     </section>
     </main>
     <footer className='bg-yellow-200 mt-10 mb-0 h-full p-4 place-items-center'>
