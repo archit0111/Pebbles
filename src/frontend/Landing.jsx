@@ -11,7 +11,7 @@ function Landing() {
       <p className='text-5xl mt-10 lg:text-8xl'>Welcome on Pebbel,</p>
       <section className='place-items-center h-fit sm:flex gap-1 mt-20'>
         <div className="bg-slate-50 h-60 w-4/5 text-center place-content-center "><img className='md:h-60 shadow-2xl justify-self-center' src={DashboardSnap} alt="Dasboard_snap" /></div>
-        <div className=' h-60 w-1/3 place-content-center text-center'><button className='bg-green-500 hover:bg-green-600 p-2 text-white px-4 rounded-sm font-extrabold flex items-center gap-1 cursor-pointer'>Get Started<CircleArrowRight size={18} /></button></div>
+        <div className=' h-60 w-1/3 place-content-center text-center'><a href="/signup"><button className='bg-green-500 hover:bg-green-600 p-2 text-white px-4 rounded-sm font-extrabold flex items-center gap-1 cursor-pointer'>Get Started<CircleArrowRight size={18} /></button><a/></a></div>
       </section>
     <section className='place-items-center mt-5'>
       <div className='bg-yellow-50 h-60 w-80 lg:h-130 lg:w-150 flex items-center justify-center text-center border border-yellow-950 rounded-sm mt-20'>
