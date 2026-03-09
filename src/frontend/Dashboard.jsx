@@ -93,7 +93,6 @@ function Dasboard(){
             <div className="w-3/4 mt-10 pb-8 rounded-4xl shadow-2xl">
             <div className="h-14 text-center bg-yellow-200 place-content-center rounded-t-3xl mb-10 flex justify-between px-6 items-center">
                 <div><p className="text-3xl text-yellow-600 font-extrabold">Your Pebbles</p></div>
-                <div>a</div>
             </div>
             {pebbles.length === 0?<div className="text-center font-medium pb-10"> Nothing to show!</div>:
                 pebbles.map((item,index)=>(
