@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom";
 import Modal from './Modal';
 import Nav from "./Nav";
-import {Trash2} from 'lucide-react'
+import {Trash2, Plus} from 'lucide-react'
 
 
 function Dasboard(){
@@ -82,10 +82,19 @@ function Dasboard(){
             </div>
         </Modal>:null}
         <main className="mt-10 place-items-center">
-            <div className="w-9/10 py-10"><p className="font-extrabold text-3xl md:text-6xl"> <span className="text-yellow-900">Welcome!</span> <span className="text-yellow-600 transition transform hover:transla-y-4">{name}</span></p></div> 
+            <div className="mt-5 flex justify-between w-3/4">
+            <div className="py-10"><p className="font-extrabold text-3xl md:text-6xl"> <span className="text-yellow-900">Welcome!</span> <span className="text-yellow-600 transition transform hover:transla-y-4">{name}</span></p></div> 
+            <div className="mr-0 self-center">
+                <button className="flex items-center gap-1.5 text-sm font-bold px-4 py-1.5 rounded-lg shadow-md hover:shadow-lg bg-yellow-600 text-white" onClick={handelClose}>
+                <Plus size={16} />New Pebble</button>
+            </div>
+            </div>
 
             <div className="w-3/4 mt-10 pb-8 rounded-4xl shadow-2xl">
-            <div className="h-14 text-center bg-yellow-200 place-content-center rounded-t-3xl mb-10"><p className="text-3xl text-yellow-600 font-extrabold">Your Pebbles</p></div>
+            <div className="h-14 text-center bg-yellow-200 place-content-center rounded-t-3xl mb-10 flex justify-between px-6 items-center">
+                <div><p className="text-3xl text-yellow-600 font-extrabold">Your Pebbles</p></div>
+                <div>a</div>
+            </div>
             {pebbles.length === 0?<div className="text-center font-medium pb-10"> Nothing to show!</div>:
                 pebbles.map((item,index)=>(
                     <div key={index} className="h-fit rounded-xl justify-between bg-yellow-100 p-1 px-2 hover:shadow-xl mb-4">
